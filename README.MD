@@ -12,9 +12,27 @@ Skystore - это учебный проект интернет-магазина,
 
 ## Технологии
 asgiref==3.11.1
+asttokens==3.0.1
+colorama==0.4.6
+decorator==5.2.1
 Django==6.0.3
+executing==2.2.1
+ipython==9.11.0
+ipython_pygments_lexers==1.1.1
+jedi==0.19.2
+matplotlib-inline==0.2.1
+parso==0.8.6
+pillow==12.1.1
+prompt_toolkit==3.0.52
+psycopg2-binary==2.9.11
+pure_eval==0.2.3
+Pygments==2.19.2
+python-dotenv==1.2.2
 sqlparse==0.5.5
+stack-data==0.6.3
+traitlets==5.14.3
 tzdata==2025.3
+wcwidth==0.6.0
 
 ## Установка и запуск
 1. Клонировать репозиторий: ```https://github.com/ts19830409/my_online_store_django.git```
