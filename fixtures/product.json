@@ -1,0 +1,80 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Мобильный телефон",
+        "photo": "",
+        "category": 1,
+        "price": "50000.00",
+        "created_at": "2026-03-29T02:10:21.894Z",
+        "updated_at": "2026-03-29T02:10:21.894Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Ноутбук",
+        "description": "Портативный компьютер",
+        "photo": "",
+        "category": 1,
+        "price": "80500.99",
+        "created_at": "2026-03-29T02:10:32.939Z",
+        "updated_at": "2026-03-29T02:10:32.939Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Руслан и Людмила",
+        "description": "автор А.С. Пушкин",
+        "photo": "",
+        "category": 3,
+        "price": "3800.00",
+        "created_at": "2026-03-29T02:10:43.520Z",
+        "updated_at": "2026-03-29T02:10:43.520Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Война и мир",
+        "description": "автор Л.Н. Толстой",
+        "photo": "",
+        "category": 3,
+        "price": "2800.00",
+        "created_at": "2026-03-29T02:11:02.023Z",
+        "updated_at": "2026-03-29T02:11:02.023Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Шпапка ушанка",
+        "description": "Меховая",
+        "photo": "",
+        "category": 2,
+        "price": "1500.00",
+        "created_at": "2026-03-29T02:11:19.067Z",
+        "updated_at": "2026-03-29T02:11:19.067Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "Футболка черная",
+        "description": "Хлопковая",
+        "photo": "",
+        "category": 2,
+        "price": "999.99",
+        "created_at": "2026-03-29T02:11:27.875Z",
+        "updated_at": "2026-03-29T02:11:27.875Z"
+    }
+}
+]
