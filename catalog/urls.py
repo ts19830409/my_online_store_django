@@ -1,14 +1,17 @@
-from tkinter.font import names
+
 
 from django.urls import path
 from catalog.apps import CatalogConfig
-from catalog.views import catalog, contacts, products_list, products_detail, product_add
+from catalog.views import (CatalogView, ContactsView, ProductListView, ProductDetailView, ProductCreateView,
+                           ProductUpdateView, ProductDeleteView)
 
 app_name = CatalogConfig.name
 urlpatterns = [
-	path('catalog/', catalog, name='catalog'),
-	path('contacts/', contacts, name='contacts'),
-	path('', products_list, name='products_list'),
-    path('products/<int:pk>/', products_detail, name='products_detail'),
-	path('product_add/', product_add, name='product_add'),
+	path('catalog/', CatalogView.as_view(), name='catalog'),
+	path('contacts/', ContactsView.as_view(), name='contacts'),
+	path('', ProductListView.as_view(), name='product_list'),
+    path('products/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+	path('products/create', ProductCreateView.as_view(), name='product_create'),
+	path('products/<int:pk>/update/', ProductUpdateView.as_view(), name='product_update'),
+	path('products/<int:pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
 ]

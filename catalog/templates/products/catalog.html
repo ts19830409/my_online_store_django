@@ -1,0 +1,38 @@
+{% extends 'products/base.html' %}
+{% block content %}
+{% load tags%}
+
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center mb-4">Каталог товаров</h1>
+
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        {% if category.description %}
+                            <p class="card-text">{{ category.description|truncatechars:100 }}</p>
+                        {% endif %}
+                        <p class="card-text">
+                            <span class="badge bg-primary">
+                                Товаров: {{ category.products.count }}
+                            </span>
+                        </p>
+                        <a href="{% url 'catalog:product_list' %}?category={{ category.pk }}" class="btn btn-outline-primary">
+                            Смотреть товары
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center">
+                <p>Категорий пока нет</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

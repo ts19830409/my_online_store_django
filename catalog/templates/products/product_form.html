@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'products/base.html' %}
 {% block content %}
 
 <div class="container mt-4">
@@ -6,69 +6,85 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
+                    {% if object %}
+                    <h2 class="mb-0">Редактировать товар</h2>
+                    {% else %}
                     <h2 class="mb-0">Добавить товар</h2>
+                    {% endif %}
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
 
+
                         <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">Наименование продукта</label>
+                            <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">Наименование
+                                продукта</label>
                             <input type="text"
                                    name="{{ form.name.name }}"
                                    id="{{ form.name.id_for_label }}"
                                    class="form-control {% if form.name.errors %}is-invalid{% endif %}"
                                    value="{{ form.name.value|default:'' }}">
                             {% if form.name.errors %}
-                                <div class="invalid-feedback">
-                                    {{ form.name.errors|join:", " }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ form.name.errors|join:", " }}
+                            </div>
                             {% endif %}
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.description.id_for_label }}" class="form-label fw-bold">Описание продукта</label>
+                            <label for="{{ form.description.id_for_label }}" class="form-label fw-bold">Описание
+                                продукта</label>
                             <textarea name="{{ form.description.name }}"
                                       id="{{ form.description.id_for_label }}"
                                       class="form-control {% if form.description.errors %}is-invalid{% endif %}"
                                       rows="5">{{ form.description.value|default:'' }}</textarea>
                             {% if form.description.errors %}
-                                <div class="invalid-feedback">
-                                    {{ form.description.errors|join:", " }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ form.description.errors|join:", " }}
+                            </div>
                             {% endif %}
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.photo.id_for_label }}" class="form-label fw-bold">Изображение продукта</label>
+                            <label for="{{ form.photo.id_for_label }}" class="form-label fw-bold">Изображение
+                                продукта</label>
                             <input type="file"
                                    name="{{ form.photo.name }}"
                                    id="{{ form.photo.id_for_label }}"
                                    class="form-control {% if form.photo.errors %}is-invalid{% endif %}">
-                            {% if form.photo.errors %}
-                                <div class="invalid-feedback">
-                                    {{ form.photo.errors|join:", " }}
+
+                            {% if object.photo %}
+                                <div class="form-text">
+                                     Текущий файл: {{ object.photo.name }}
                                 </div>
+                            {% endif %}
+
+                            {% if form.photo.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.photo.errors|join:", " }}
+                            </div>
                             {% endif %}
                             <div class="form-text">Допустимые форматы: JPG, JPEG, PNG, GIF</div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.category.id_for_label }}" class="form-label fw-bold">Категория продукта</label>
+                            <label for="{{ form.category.id_for_label }}" class="form-label fw-bold">Категория
+                                продукта</label>
                             <select name="{{ form.category.name }}"
                                     id="{{ form.category.id_for_label }}"
                                     class="form-select {% if form.category.errors %}is-invalid{% endif %}">
                                 <option value="">---------</option>
                                 {% for category in form.category.field.queryset %}
-                                    <option value="{{ category.pk }}" {% if form.category.value == category.pk %}selected{% endif %}>
-                                        {{ category.name }}
-                                    </option>
+                                <option value="{{ category.pk }}" {% if form.category.value == category.pk %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
                                 {% endfor %}
                             </select>
                             {% if form.category.errors %}
-                                <div class="invalid-feedback">
-                                    {{ form.category.errors|join:", " }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ form.category.errors|join:", " }}
+                            </div>
                             {% endif %}
                         </div>
 
@@ -84,15 +100,15 @@
                                        value="{{ form.price.value|default:'' }}">
                             </div>
                             {% if form.price.errors %}
-                                <div class="invalid-feedback">
-                                    {{ form.price.errors|join:", " }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ form.price.errors|join:", " }}
+                            </div>
                             {% endif %}
                         </div>
 
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">Сохранить</button>
-                            <a href="{% url 'catalog:products_list' %}" class="btn btn-secondary">Отмена</a>
+                            <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отмена</a>
                         </div>
                     </form>
                 </div>
