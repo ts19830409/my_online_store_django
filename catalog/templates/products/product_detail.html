@@ -1,0 +1,25 @@
+{% extends 'products/base.html' %}
+{% block content %}
+{% load tags%}
+
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.photo | media_filter }}" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ object.name }}</h5>
+        <p class="card-text">{{ object.description }}</p>
+        <p class="card-text fw-bold fs-5">{{ product.price }} ₽</p>
+        <button type="submit" class="btn btn-primary">Купить</button>
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отмена</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ {% endblock %}
