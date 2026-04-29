@@ -5,10 +5,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView, TemplateView
 from catalog.models import Contact, Product, Category
 
+from catalog.forms import ProductForm
+
 
 class CatalogView(TemplateView):
 	template_name = 'products/catalog.html'
-	fields = ("name", "description")
 	
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -53,15 +54,16 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
 	model = Product
 	template_name = 'products/product_form.html'
-	fields = ("name", "description", "photo", "category", "price")
+	# fields = ("name", "description", "photo", "category", "price")
+	form_class = ProductForm
 	success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductUpdateView(UpdateView):
 	model = Product
 	template_name = 'products/product_form.html'
-	# form_class = ProductForm
-	fields = ("name", "description", "photo", "category", "price")
+	# fields = ("name", "description", "photo", "category", "price")
+	form_class = ProductForm
 	success_url = reverse_lazy('catalog:product_list')
 
 
