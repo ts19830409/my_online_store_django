@@ -14,6 +14,12 @@
 <body>
 {% include 'products/includes/inc_menu.html' %}
 
+{% if user.is_authenticated %}
+         <p class="ms-3 text-primary fw-bold">Добро пожаловать, {{ user.email }}!</p>
+    {% else %}
+        <p class="ms-3 text-muted">Добро пожаловать, гость!</p>
+    {% endif %}
+
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">My online store</h1>
     <p class="lead">My online store - это первый мой онлайн магазин</p>

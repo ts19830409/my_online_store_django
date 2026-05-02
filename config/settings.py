@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT
+from django.conf.global_settings import MEDIA_URL, MEDIA_ROOT, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, LOGIN_URL
 from dotenv import load_dotenv
 import os
 
@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'catalog',
 	'blog',
+	'users',
 ]
 
 MIDDLEWARE = [
@@ -65,21 +66,6 @@ DATABASES = {
 	}
 }
 
-AUTH_PASSWORD_VALIDATORS = [
-	{
-		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-	},
-]
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Vladivostok'
@@ -94,3 +80,19 @@ STATICFILES_DIRS = (BASE_DIR / 'static/',)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = 'users.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+AUTH_PASSWORD_VALIDATORS = []
+LOGIN_URL = 'users:login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
