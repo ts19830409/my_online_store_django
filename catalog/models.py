@@ -44,6 +44,11 @@ class Product(models.Model):
 	price = models.DecimalField(
 		max_digits=10, decimal_places=2, verbose_name="Цена продукта"
 	)
+	
+	owner = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='products')
+	
+	is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
+	
 	created_at = models.DateTimeField(
 		verbose_name="Дата создания записи", auto_now_add=True
 	)
@@ -58,6 +63,10 @@ class Product(models.Model):
 		verbose_name_plural = "продукты"
 		ordering = [
 			"name",
+		]
+		
+		permissions = [
+			('can_unpublish_product', 'Может отменять публикацию продукта'),
 		]
 
 
