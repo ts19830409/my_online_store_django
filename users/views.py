@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-
+from django.conf import settings
 from users.models import User
 from users.forms import UserRegisterForm
 from django.core.mail import send_mail
@@ -20,6 +20,6 @@ class RegisterView(CreateView):
 	def send_welcome_email(self, user_email):
 		subject = "Добро пожаловать в наш магазин"
 		message = "Благодарим за регистрацию"
-		from_email = "ts19830409.box@yandex.com"
+		from_email = settings.DEFAULT_FROM_EMAIL
 		recipient_list = [user_email, ]
 		send_mail(subject, message, from_email, recipient_list)
