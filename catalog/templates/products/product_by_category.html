@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %}
+{% block content %}
+{% load tags %}
+
+<h1 class="mb-4">{{ category.name }}</h1>
+
+<div class="row text-center gx-4 gy-4">
+    {% for product in object_list %}
+    <div class="col-3">
+        <div class="card">
+            <img src="{{ product.photo | media_filter }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                <p class="card-text fw-bold fs-5">{{ product.price }} ₽</p>
+                <a href="{% url 'catalog:product_detail' product.pk %}" class="card-link">Просмотр</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Товаров в этой категории нет</p>
+    {% endfor %}
+</div>
+{% endblock %}

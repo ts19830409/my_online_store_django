@@ -6,7 +6,8 @@ from django.views.generic import ListView, DetailView, TemplateView
 from catalog.models import Contact, Product, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import ProductForm
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 class CatalogView(TemplateView):
 	template_name = 'products/catalog.html'
@@ -44,7 +45,7 @@ class ProductListView(ListView):
 			queryset = queryset.filter(category_id=category_id)
 		return queryset
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
 	model = Product
 	template_name = 'products/product_detail.html'
@@ -86,3 +87,17 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 		if not obj.owner == request.user and not request.user.has_perm('catalog.can_unpublish_product'):
 			return HttpResponse("У вас нет прав на удаление этого продукта", status=403)
 		return super().dispatch(request, *args, **kwargs)
+
+
+class ProductByCategoryView(ListView):
+	model = Product
+	template_name = 'products/product_by_category.html'
+	
+	def get_queryset(self):
+		from catalog.services import get_products_by_category
+		return get_products_by_category(self.kwargs['category_id'])
+	
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['category'] = Category.objects.get(pk=self.kwargs['category_id'])
+		return context
