@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <article>
+            {% if object.preview %}
+            <img src="{{ object.preview.url }}" class="img-fluid mb-4" alt="{{ object.title }}">
+            {% endif %}
+
+            <h1>{{ object.title }}</h1>
+
+            <p class="text-muted">
+                {{ object.created_at|date:"d.m.Y" }} |
+                {{ object.views_count }} просмотров
+            </p>
+
+            <hr>
+
+            <div class="mt-4">
+                {{ object.content|linebreaks }}
+            </div>
+
+            <hr>
+
+            <div class="mt-4">
+                <a href="{% url 'blog:list' %}" class="btn btn-secondary">Назад</a>
+
+            </div>
+        </article>
+    </div>
+</div>
+
+{% endblock %}
